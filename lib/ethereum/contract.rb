@@ -163,11 +163,11 @@ module Ethereum
     end
 
     def call_payload(fun, args)
-      "0x" + fun.signature + (@encoder.encode_arguments(fun.inputs, args).presence || "0"*64)
+      "0x" + fun.signature + (@encoder.encode_arguments(fun.inputs, [args[0]]).presence || "0"*64)
     end
 
     def call_args(fun, args)
-      add_gas_options_args({to: @address, from: @sender, data: call_payload(fun, args)})
+      add_gas_options_args({to: @address, from: @sender, data: call_payload(fun, args), default_block: args[1]})
     end
 
     def call_raw(fun, *args)
