@@ -249,6 +249,7 @@ module Ethereum
       create_event_proxies
       class_methods = Class.new do
         extend Forwardable
+        def_delegators :parent, :default_block
         def_delegators :parent, :deploy_payload, :deploy_args, :call_payload, :call_args
         def_delegators :parent, :signed_deploy, :key, :key=
         def_delegators :parent, :gas_limit, :gas_price, :gas_limit=, :gas_price=, :nonce, :nonce=
